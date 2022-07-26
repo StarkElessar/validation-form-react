@@ -1,1 +1,3 @@
-# Getting Started with Create React App
+# Custom form validation ReactApp
+
+Для валидации полей были созданы два кастомных хука useValidation и useInput
