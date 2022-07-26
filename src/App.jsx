@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { memo, useState } from 'react'
 import { useInput } from './hooks/useInput'
 
 const App = () => {
@@ -23,12 +23,12 @@ const App = () => {
           Sign in and start managing your candidates!
         </h2>
         <div className="form__input-block">
-          {(email.isDirty && email.isEmpty) && <div className='form__input-error'>Поле не может быть пустым!</div>}
-          {(email.isDirty && email.emailError) && <div className='form__input-error'>E-mail некорректный!</div>}
+          {(email.isDirty && email.isEmpty) && <div className='form__input-error'>{email.emptyFields}</div>}
+          {(email.isDirty && email.emailError) && <div className='form__input-error'>{email.invalidEmail}</div>}
           <input
             value={email.value}
             onChange={(e) => email.onChange(e)}
-            onBlur={(e) => email.onBlur(e)}
+            onBlur={email.onBlur}
             type='text'
             name='email'
             placeholder='Введите ваш E-mail..'
@@ -37,13 +37,13 @@ const App = () => {
         </div>
 
         <div className="form__input-block">
-          {(password.isDirty && password.isEmpty) && <div className='form__input-error'>Поле не может быть пустым!</div>}
-          {(password.isDirty && password.minLengthError) && <div className='form__input-error'>Пароль очень короткий!</div>}
-          {(password.isDirty && password.maxLengthError) && <div className='form__input-error'>Пароль слишком длинный!</div>}
+          {(password.isDirty && password.isEmpty) && <div className='form__input-error'>{email.emptyFields}</div>}
+          {(password.isDirty && password.minLengthError) && <div className='form__input-error'>{email.shortPass}</div>}
+          {(password.isDirty && password.maxLengthError) && <div className='form__input-error'>{email.longPass}</div>}
           <input
             value={password.value}
             onChange={(e) => password.onChange(e)}
-            onBlur={(e) => password.onBlur(e)}
+            onBlur={password.onBlur}
             type='password'
             name='password'
             placeholder='Введите ваш пароль..'
