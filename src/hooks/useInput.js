@@ -23,11 +23,18 @@ export const useInput = (initialValue, validations) => {
     setIsDirty(true)
   }
 
+  const clearFields = () => {
+    setValue('')
+    setIsDirty(false)
+  }
+
+
   return {
     value,
     isDirty,
     onChange,
     onBlur,
+    clearFields,
     ...valid,
     ...textErrors,
   }
