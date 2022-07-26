@@ -9,8 +9,10 @@ export const useInput = (initialValue, validations) => {
   const textErrors = {
     emptyFields: 'Поле не может быть пустым!',
     invalidEmail: 'E-mail некорректный!',
-    shortPass: 'Пароль очень короткий',
+    shortPass: 'Пароль очень короткий!',
     longPass: 'Пароль очень длинный!',
+    shortTel: 'Номер телефона слишком короткий!',
+    longTel: 'Номер телефона слишком длинный!',
   }
 
   const onChange = (event) => {
