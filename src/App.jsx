@@ -3,7 +3,9 @@ import { useInput } from './hooks/useInput'
 import emailjs from '@emailjs/browser'
 
 const App = () => {
+  const form = useRef()
   const [theme, setTheme] = useState(false)
+  const [statusEmail, setStatusEmail] = useState(false)
   const email = useInput('', { isEmpty: true, isMail: true })
   const password = useInput('', { isEmpty: true, minLength: 6, maxLength: 12 })
   const phone = useInput('', { isEmpty: true, minLength: 9, maxLength: 13 })
@@ -11,17 +13,20 @@ const App = () => {
   const handleSetTheme = () => setTheme(!theme)
   const darkTheme = theme ? 'dark' : ''
 
-  const form = useRef();
-
   const sendEmail = (e) => {
     e.preventDefault();
 
     emailjs.sendForm('service_4b02ni1', 'template_4w6byi5', form.current, '3M80LCpJrLNA6Po3z')
       .then((result) => {
-        console.log(result.text);
+        console.log(result.text)
       }, (error) => {
-        console.log(error.text);
-      });
+        console.log(error.text)
+      })
+      
+    setStatusEmail(true)
+    email.clearFields()
+    password.clearFields()
+    phone.clearFields()
   };
 
   return (
@@ -95,7 +100,7 @@ const App = () => {
           </div>
 
           <button
-            disabled={!email.inputValid || !password.inputValid}
+            disabled={!email.inputValid || !password.inputValid || !phone.inputValid}
             className={`form__button-login ${darkTheme}`}
             type='submit'
           >
@@ -103,6 +108,21 @@ const App = () => {
           </button>
         </form>
       </div>
+      {
+        statusEmail && (
+          <div className="status-form">
+            <div className="status-form__body">
+              <button
+                className='status-form__close-btn'
+                onClick={() => setStatusEmail(false)}
+              >
+                x
+              </button>
+              <h2 className='status-form__title'>Ваша заявка успешно отправленна!</h2>
+            </div>
+          </div>
+        )
+      }
     </div>
   )
 }
