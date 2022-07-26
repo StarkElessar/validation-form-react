@@ -1,0 +1,240 @@
+::-webkit-scrollbar {
+  width: 12px;
+  background-color: $whiteColor;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: $greenColor;
+}
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(#000, 20%);
+  border-radius: 10px;
+  background-color: #f9f9fd;
+}
+body {
+  &.lock {
+    overflow: hidden;
+  }
+}
+#root {
+  height: 100%;
+}
+.wrapper {
+  min-height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  &.dark {
+    background: #093545;
+  }
+}
+[class*="__container"] {
+  max-width: 1170px + $mainOffset * 2;
+  margin: 0 auto;
+  padding: 0 $mainOffset;
+  @media (max-width: 425.98px) {
+    padding: 0 ($mainOffset - 10);
+  }
+}
+// ==================================================================================
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  text-align: center;
+  color: $blueColor;
+  &.dark {
+    color: #fff;
+  }
+}
+
+.set-theme {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  box-shadow: $lightBoxShadow;
+  border-radius: 50%;
+  transition: $standartTrans;
+  &:hover {
+    box-shadow: $hoverBoxShadow;
+  }
+}
+
+.form {
+  &__title {
+    font-size: 64px;
+  }
+  &__sub-title {
+    margin-top: 40px;
+    margin-bottom: 36px;
+
+    font-size: 16px;
+    line-height: 20px;
+  }
+  &__input-block {
+    &:not(:last-child) {
+      margin-bottom: 30px;
+    }
+  }  
+  &__input-error {
+    padding: 0 30px 10px;
+    color: $redColor;
+  }
+  &__input {
+    display: block;
+    margin: 0 auto;
+    width: 300px;
+    padding: 12px 18px;
+    background: $blueColor;
+    color: #fff;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    transition: $standartTrans;
+    &::placeholder {
+      line-height: 20px;
+      color: #fff;
+    }
+    &:hover {
+      box-shadow: $hoverBoxShadow;
+    }
+    &:focus {
+      border-color: $greenColor;
+      box-shadow: $lightBoxShadow;
+    }
+  }
+  &__row {
+    margin: 30px 0;
+  }
+  &__label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    & input {
+      display: none;
+    }
+    & input:checked + .form__label-check {
+      background: $greenColor;
+    }
+    & input:checked + .form__label-check::after {
+      opacity: 1;
+    }
+    &:hover {
+      .form__label-check::after {
+        opacity: 1;
+      }
+      .form__label-text {
+        color: $blueColor;
+      }
+    }
+    &.dark {
+      & input:checked + .form__label-check::after {
+        background: $whiteColor;
+      }
+      &:hover {
+        .form__label-text {
+          color: $greenColor;
+        }
+      }
+    }
+  }
+  &__label-check {
+    position: relative;
+    margin-right: 7px;
+    width: 18px;
+    height: 17px;
+    border: 2px solid $blueColor;
+    border-radius: 5px;
+    background: $whiteColor;
+    transition: $standartTrans;
+    &.dark {
+      border: 2px solid $whiteColor;
+      background: $blueColor;
+    }
+    &::after {
+      position: absolute;
+      content: "";
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -55%);
+      width: calc(100% - 5px);
+      height: calc(100% - 5px);
+      background: $blueColor;
+      border-radius: 2px;
+      opacity: 0;
+      transition: $standartTrans;
+    }
+  }
+  &__label-text {
+    color: #093545;
+    transition: $standartTrans;
+    &.dark {
+      color: #fff;
+    }
+  }
+  &__forgot {
+    font-family: "Montserrat";
+    font-weight: 500;
+    line-height: 17px;
+    text-align: center;
+    color: #000;
+    cursor: pointer;
+    transition: color 280ms ease-in-out;
+    &:hover {
+      color: $blueColor;
+    }
+    &.dark {
+      color: $greenColor;
+    }
+  }
+  &__button-login {
+    display: block;
+    margin: 0 auto;
+    width: 300px;
+    padding: 13px 0;
+    background: $greenColor;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    text-transform: capitalize;
+    color: #224957;
+    transition: $standartTrans;
+    &.dark {
+      color: $whiteColor;
+      &:disabled {
+        cursor: not-allowed;
+        background: darken($greenColor, 10%);
+        &:hover {
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+          background: darken($greenColor, 10%);
+          color: $whiteColor;
+        }
+      }
+    }
+    &:disabled {
+      cursor: not-allowed;
+      background: darken($greenColor, 10%);
+      &:hover {
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+        background: darken($greenColor, 10%);
+        color: $blueColor;
+      }
+    }
+    &:hover {
+      box-shadow: $hoverBoxShadow;
+      background: darken($greenColor, 10%);
+      color: $whiteColor;
+    }
+    
+  }
+}
