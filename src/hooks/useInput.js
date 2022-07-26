@@ -6,19 +6,27 @@ export const useInput = (initialValue, validations) => {
   const [isDirty, setIsDirty] = useState(false)
   const valid = useValidation(value, validations)
 
+  const textErrors = {
+    emptyFields: 'Поле не может быть пустым!',
+    invalidEmail: 'E-mail некорректный!',
+    shortPass: 'Пароль очень короткий',
+    longPass: 'Пароль очень длинный!',
+  }
+
   const onChange = (event) => {
     setValue(event.target.value)
   }
 
-  const onBlur = (event) => {
+  const onBlur = () => {
     setIsDirty(true)
   }
 
   return {
     value,
+    isDirty,
     onChange,
     onBlur,
-    isDirty,
-    ...valid
+    ...valid,
+    ...textErrors,
   }
 }
