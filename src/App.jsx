@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react'
+import React, { useState } from 'react'
 import { useInput } from './hooks/useInput'
 
 const App = () => {
